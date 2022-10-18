@@ -19,7 +19,7 @@ This is the computational pipeline that takes in mito-region multiplexed (Figure
 2. This package doesn't require installation to system or local `bin`. Users just need to download and place the source code folder (`Source`) to the workplace where the pipeline will be run. Make sure the `Data` folder is the same level as `Source`. If users want to use some module as standalone, they may simply source the corresponding file in bash or R environment. 
 
 ## Usage
-1. Prepare the sample sheet (`Data/LibraryInfo.csv`). The format is exemplified as below
+1. Prepare the sample sheet (`Data/LibraryInfo.csv`). The format is exemplified as below,
 ```
 $ head -n 5 Data/LibraryInfo.csv
 LibraryID,ExptID,Species,MitoBarcode,SNVLoci,EndType,ReadLength
@@ -38,10 +38,12 @@ $ bash Source/release/pipeline.bash
 ```
 source("Source/release/pipeline.R")
 ```
-
 ## Copyright
+
 Copyright (c) 2021, Youtao Lu and Junhyong Kim, Department of Biology, University of Pennsylvania
+
 Copyright (c) 2021, James Eberwine, Perelman School of Medicine, University of Pennsylvania
+
 Copyright (c) 2021, David Issadore, Penn Engineering, University of Pennsylvania
 
 All Rights Reserved.
