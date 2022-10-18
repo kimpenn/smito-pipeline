@@ -1,4 +1,4 @@
-# Single-MITOchondrion Single-Nucleotide Variant (SMITO-SNV) Pipeline
+# Single-MITOchondrion (SMITO) Single-Nucleotide Variant Pipeline
 
 ## Overview
 This is the computational pipeline that takes in mito-region multiplexed (Figure 1) next-generation sequencing data and outputs SNV (including indels) for each single mitochondrion for each PCR targeted region, succeeding the previous work based on micropipetting [1]. The output is a comma-delimited table containing per-base information including the position, read depth, reference base, and the frequency of variants (substitution/deletion), which is further processed so that low-Phred-score counts are removed. Insertions are also tabulated in a separated table. 
