@@ -1,14 +1,14 @@
 # Single-MITOchondrion (SMITO) SNV Computational Pipeline
 
 ## Overview
-This is the computational pipeline that takes in microfluidics based, mito-locus multiplexed (Figure 1) next-generation sequencing data, and outputs SNVs (including indels) for each single mitochondrion for each PCR targeted region, succeeding the previous work based on micropipetting [1]. The output is a comma-delimited table containing per-base information including the position, read depth, reference base, and the frequency of variants (substitution/deletion), which is further processed so that low-Phred-score, reverse-strand or low-depth counts can be removed. Deletions are output alongside substitutions while insertions are tabulated in a separate sheet. The code is hosted and maintained at [https://github.com/kimpenn/smito-pipeline](https://github.com/kimpenn/smito-pipeline). 
+This is the computational pipeline that takes in microfluidics based, mito-locus multiplexed (Figure 1) NGS data, and outputs SNVs (including indels) for each mitochondrion for each PCR targeted region, succeeding the previous work based on micropipetting [1]. The output is a comma-delimited table containing per-base information including the position, read depth, reference base, and the frequency of variants (substitution/deletion) in a single mitochondrion, which is further processed so that low-Phred-score, reverse-strand or low-depth counts can be removed. Deletions are output alongside substitutions while insertions are tabulated in a separate sheet. The code is hosted and maintained at [https://github.com/kimpenn/smito-pipeline](https://github.com/kimpenn/smito-pipeline). 
 
 
 ![Figure 1](multiplex.png)
 Figure 1. Schematic showing the subcellular organelle sorting and multiplexed RCA/PCR technology developed by Laboratory of David Issadore (Yang et al.) and Laboratory of James Eberwine (Kadam and Zhu). 
 
 ## Dependencies
-* [PennSCAP-T preprocessor](https://github.com/kimpenn/ngs-smito) (>=2.3) by Nordgren and Fisher
+* [PennSCAP-T preprocessor](https://github.com/kimpenn/ngs-smito) (>=2.3) by [Nordgren](https://github.com/chucknordy) and [Fisher](https://github.com/safisher)
 * GNU parallel (>=20190122)
 * Perl (>=5.010), String::Approx (>3.0)
 * R (>=3.5.0), optparse (>=1.6)
@@ -17,7 +17,7 @@ Figure 1. Schematic showing the subcellular organelle sorting and multiplexed RC
 
 ## Installation
 1. Install the dependencies as listed above.
-2. This package doesn't require installation to system or local `bin`. Users just need to download and place the source code folder (`Source`) to the workplace where the pipeline will be run. Make sure the `Data` folder is the same level as `Source`. If users want to use some module as standalone, they may simply source the corresponding file in bash or R environment. 
+2. This package doesn't require installation to system or local `bin`. Users just need to download and place the source code folder (`Source`) into the workplace where the pipeline will be run. Please make sure the `Data` folder is the same level as `Source`. If users want to use some module as standalone, they may simply source the corresponding file in bash or R environment. 
 
 ## Usage
 1. Prepare the sample sheet (`Data/LibraryInfo.csv`). The format is exemplified as below
@@ -54,4 +54,4 @@ All Rights Reserved.
 
 ## References
 1. Morris, Jacqueline, Young-Ji Na, Hua Zhu, Jae-Hee Lee, Hoa Giang, Alexandra V. Ulyanova, Gordon H. Baltuch, et al. 2017. "Pervasive Within-Mitochondrion Single-Nucleotide Variant Heteroplasmy as Revealed by Single-Mitochondrion Sequencing." Cell Reports 21 (10): 2706–13. https://doi.org/10.1016/j.celrep.2017.11.031.
-2. The coming paper.
+2. The coming paper by Kadam et al.
