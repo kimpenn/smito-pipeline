@@ -1,10 +1,11 @@
 ###########################################################################
-## Youtao Lu <luyoutao@sas.upenn.edu>
-## Copyright (c) 2021, Youtao Lu and Junhyong Kim, Department of Biology, University of Pennsylvania
-## Copyright (c) 2021, James Eberwine, Perelman School of Medicine, University of Pennsylvania
-## Copyright (c) 2021, David Issadore, Penn Engineering, University of Pennsylvania
+## Author: Youtao Lu <luyoutao@sas.upenn.edu>
+## 
+## Copyright (c) 2021, Laboratory of Junhyong Kim, Department of Biology, University of Pennsylvania
+## Copyright (c) 2021, Laboratory of James Eberwine, Perelman School of Medicine, University of Pennsylvania
+## Copyright (c) 2021, Laboratory of David Issadore, Penn Engineering, University of Pennsylvania
 ## All Rights Reserved.
-
+## 
 ## You may not use this file except in compliance with the Kim Lab License
 ## located at
 ##
@@ -457,26 +458,40 @@ function sam_stats {
 
     for i in $bcidx; do
         m=M$i
+#         if [[ $verbose == "true" ]]; then
+#             echo java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2\> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
+#         fi
+#         java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
+#         if [[ $verbose == "true" ]]; then
+#             echo samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
+#         fi
+#         samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
+#         if [[ $verbose == "true" ]]; then
+#             echo samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \| perl -ne \'if \(/^@/\) { print } else { print if /NH:i:1\\t/ }\' \| samtools view -Sb - \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+#         fi
+#         samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam | perl -ne 'if (/^@/) { print } else { print if /NH:i:1\t/ }' | samtools view -Sb - > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+#         if [[ $verbose == "true" ]]; then
+#             echo samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+#         fi
+#         samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+#         if [[ $verbose == "true" ]]; then
+#             echo samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam \| gzip -c \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
+#         fi
+#         samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam | gzip -c > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
+
+        ## Add an additional filter for reads that (1) start from the 5' end of the PCR forward primer, (2) have length >130bp, (3) on the forward strand 
         if [[ $verbose == "true" ]]; then
-            echo java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2\> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
+            echo perl Source/functions/SMITO/filter_sam.pl --infile $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam --outfile $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam --snvfile Data/snv_loci_v2.csv --minlen 135 --offup 1 --offdn 1 2\> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam.log
         fi
-        java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
+        perl Source/functions/SMITO/filter_sam.pl --infile $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam --outfile $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam --snvfile Data/snv_loci_v2.csv --minlen 135 --offup 1 --offdn 1 2> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam.log
         if [[ $verbose == "true" ]]; then
-            echo samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
+            echo samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam
         fi
-        samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
+        samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam
         if [[ $verbose == "true" ]]; then
-            echo samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \| perl -ne \'if \(/^@/\) { print } else { print if /NH:i:1\\t/ }\' \| samtools view -Sb - \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+            echo samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam \| gzip -c \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.depth.tsv.gz
         fi
-        samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam | perl -ne 'if (/^@/) { print } else { print if /NH:i:1\t/ }' | samtools view -Sb - > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
-        if [[ $verbose == "true" ]]; then
-            echo samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
-        fi
-        samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
-        if [[ $verbose == "true" ]]; then
-            echo samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam \| gzip -c \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
-        fi
-        samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam | gzip -c > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
+        samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.posSorted.bam | gzip -c > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.strict.depth.tsv.gz
     done
 }
 
@@ -577,6 +592,7 @@ function sam_mpileup_subsam {
     local subsam_l='500k'
     local genome='/lab/repo/resources/src/mm10.mito/chrM.fa'
     local bcidx='1 2 3 4 5 6 7 8 9 10'
+    local starbase="unique"
     while [[ $# -gt 0 ]]; do
         case $1 in
             --baseDir)
@@ -607,12 +623,16 @@ function sam_mpileup_subsam {
                 genome=$2
                 shift; shift
                 ;;
+            --starbase)
+                starbase=$2
+                shift; shift
+                ;;
             --verbose)
                 verbose=true
                 shift
                 ;;
             *)
-                echo "sam_mpileup_subsam [--baseDir Data] [--exptDir E.smito] [--subsam_n 500000] [--subsam_l 500k] [--genome /lab/repo/resources/src/mm10.mito/chrM.fa] [--bcidx '1 2 3 4 5 6 7 8 9 10'] --sampleID L19R23P3 [--verbose]"
+                echo "sam_mpileup_subsam [--baseDir Data] [--exptDir E.smito] [--subsam_n 500000] [--subsam_l 500k] [--genome /lab/repo/resources/src/mm10.mito/chrM.fa] [--bcidx '1 2 3 4 5 6 7 8 9 10'] --sampleID L19R23P3 [--starbase unique] [--verbose]"
                 return 1
                 ;;
         esac
@@ -627,29 +647,29 @@ function sam_mpileup_subsam {
             snvDir=$starDir/$snv
             mkdir -p $snvDir
             if [[ $verbose == "true" ]]; then
-                echo samtools view -h $starDir/${sampleName}_${m}.star.unique.posSorted.bam chrM:$range \| samtools view -Sb - \> $snvDir/${sampleName}_${m}.star.unique.posSorted.bam
+                echo samtools view -h $starDir/${sampleName}_${m}.star.${starbase}.posSorted.bam chrM:$range \| samtools view -Sb - \> $snvDir/${sampleName}_${m}.star.${starbase}.posSorted.bam
             fi
-            samtools view -h $starDir/${sampleName}_${m}.star.unique.posSorted.bam chrM:$range | samtools view -Sb - > $snvDir/${sampleName}_${m}.star.unique.posSorted.bam
+            samtools view -h $starDir/${sampleName}_${m}.star.${starbase}.posSorted.bam chrM:$range | samtools view -Sb - > $snvDir/${sampleName}_${m}.star.${starbase}.posSorted.bam
             
             if [[ $verbose == "true" ]]; then
-                echo samtools index $snvDir/${sampleName}_${m}.star.unique.posSorted.bam
+                echo samtools index $snvDir/${sampleName}_${m}.star.${starbase}.posSorted.bam
             fi
-            samtools index $snvDir/${sampleName}_${m}.star.unique.posSorted.bam
+            samtools index $snvDir/${sampleName}_${m}.star.${starbase}.posSorted.bam
 
             if [[ $verbose == "true" ]]; then
-                echo samtools mpileup --excl-flags UNMAP,SECONDARY,QCFAIL --count-orphans --min-BQ 0 --min-MQ 0 --max-depth $subsam_n --reverse-del --fasta-ref $genome $snvDir/${sampleName}_${m}.star.unique.posSorted.bam --region chrM:$range \| gzip -c \> $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.tsv.gz #--output-extra FLAG,POS
+                echo samtools mpileup --excl-flags UNMAP,SECONDARY,QCFAIL --count-orphans --min-BQ 0 --min-MQ 0 --max-depth $subsam_n --reverse-del --fasta-ref $genome $snvDir/${sampleName}_${m}.star.${starbase}.posSorted.bam --region chrM:$range \| gzip -c \> $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.tsv.gz #--output-extra FLAG,POS
             fi
-            samtools mpileup --excl-flags UNMAP,SECONDARY,QCFAIL --count-orphans --min-BQ 0 --min-MQ 0 --max-depth $subsam_n --reverse-del --fasta-ref $genome $snvDir/${sampleName}_${m}.star.unique.posSorted.bam --region chrM:$range | gzip -c > $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.tsv.gz #--output-extra FLAG,POS
+            samtools mpileup --excl-flags UNMAP,SECONDARY,QCFAIL --count-orphans --min-BQ 0 --min-MQ 0 --max-depth $subsam_n --reverse-del --fasta-ref $genome $snvDir/${sampleName}_${m}.star.${starbase}.posSorted.bam --region chrM:$range | gzip -c > $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.tsv.gz #--output-extra FLAG,POS
 
             if [[ $verbose == "true" ]]; then
-                echo gzip -cd $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.tsv.gz \| perl Source/functions/SMITO/rm_mpileup_indel.pl \| gzip -c \> $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.noindel.tsv.gz
+                echo gzip -cd $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.tsv.gz \| perl Source/functions/SMITO/rm_mpileup_indel.pl \| gzip -c \> $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.noindel.tsv.gz
             fi
-            gzip -cd $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.tsv.gz | perl Source/functions/SMITO/rm_mpileup_indel.pl | gzip -c > $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.noindel.tsv.gz
+            gzip -cd $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.tsv.gz | perl Source/functions/SMITO/rm_mpileup_indel.pl | gzip -c > $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.noindel.tsv.gz
 
             if [[ $verbose == "true" ]]; then
-                echo "gzip -cd $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.tsv.gz | perl Source/functions/SMITO/get_mpileup_ins.pl | gzip -c > $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.ins.tsv.gz"
+                echo "gzip -cd $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.tsv.gz | perl Source/functions/SMITO/get_mpileup_ins.pl | gzip -c > $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.ins.tsv.gz"
             fi
-            gzip -cd $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.tsv.gz | perl Source/functions/SMITO/get_mpileup_ins.pl | gzip -c > $snvDir/${sampleName}_${m}.star.unique.mpileup.sub$subsam_l.ins.tsv.gz
+            gzip -cd $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.tsv.gz | perl Source/functions/SMITO/get_mpileup_ins.pl | gzip -c > $snvDir/${sampleName}_${m}.star.${starbase}.mpileup.sub$subsam_l.ins.tsv.gz
         done
     done 
 }
@@ -741,15 +761,15 @@ function run_pipe {
         esac
     done
 
-    if [[ $verbose == "true" ]]; then
-        echo init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
-    fi
-    init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
-
-    if [[ $verbose == "true" ]]; then
-        echo primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
-    fi
-    primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
+#     if [[ $verbose == "true" ]]; then
+#         echo init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
+#     fi
+#     init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
+# 
+#     if [[ $verbose == "true" ]]; then
+#         echo primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
+#     fi
+#     primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
 
     if [[ $verbose == "true" ]]; then
         echo sam_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores --picard $picard $verboseFlag
@@ -757,9 +777,9 @@ function run_pipe {
     sam_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores --picard $picard $verboseFlag
 
     if [[ $verbose == "true" ]]; then
-        echo sam_mpileup_subsam --baseDir $baseDir --exptDir $exptDir --subsam_n $subsam_n --subsam_l $subsam_l --genome $genome --bcidx "$bcidx" --sampleID $sampleID $verboseFlag
+        echo sam_mpileup_subsam --baseDir $baseDir --exptDir $exptDir --subsam_n $subsam_n --subsam_l $subsam_l --genome $genome --bcidx "$bcidx" --starbase strict --sampleID $sampleID $verboseFlag
     fi
-    sam_mpileup_subsam --baseDir $baseDir --exptDir $exptDir --subsam_n $subsam_n --subsam_l $subsam_l --genome $genome --bcidx "$bcidx" --sampleID $sampleID $verboseFlag
+    sam_mpileup_subsam --baseDir $baseDir --exptDir $exptDir --subsam_n $subsam_n --subsam_l $subsam_l --genome $genome --bcidx "$bcidx" --starbase strict --sampleID $sampleID $verboseFlag
 }
 
 ## Get coverage and mismatch call for each base position using `samtools mpileup` 
