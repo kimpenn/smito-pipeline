@@ -1,10 +1,11 @@
 ###########################################################################
-## Youtao Lu <luyoutao@sas.upenn.edu>
-## Copyright (c) 2021, Youtao Lu and Junhyong Kim, Department of Biology, University of Pennsylvania
-## Copyright (c) 2021, James Eberwine, Perelman School of Medicine, University of Pennsylvania
-## Copyright (c) 2021, David Issadore, Penn Engineering, University of Pennsylvania
+## Author: Youtao Lu <luyoutao@sas.upenn.edu>
+## 
+## Copyright (c) 2021, Laboratory of Junhyong Kim, Department of Biology, University of Pennsylvania
+## Copyright (c) 2021, Laboratory of James Eberwine, Perelman School of Medicine, University of Pennsylvania
+## Copyright (c) 2021, Laboratory of David Issadore, Penn Engineering, University of Pennsylvania
 ## All Rights Reserved.
-
+## 
 ## You may not use this file except in compliance with the Kim Lab License
 ## located at
 ##

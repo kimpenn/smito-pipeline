@@ -1,10 +1,11 @@
 ###########################################################################
-## Youtao Lu <luyoutao@sas.upenn.edu>
-## Copyright (c) 2021, Youtao Lu and Junhyong Kim, Department of Biology, University of Pennsylvania
-## Copyright (c) 2021, James Eberwine, Perelman School of Medicine, University of Pennsylvania
-## Copyright (c) 2021, David Issadore, Penn Engineering, University of Pennsylvania
+## Author: Youtao Lu <luyoutao@sas.upenn.edu>
+## 
+## Copyright (c) 2021, Laboratory of Junhyong Kim, Department of Biology, University of Pennsylvania
+## Copyright (c) 2021, Laboratory of James Eberwine, Perelman School of Medicine, University of Pennsylvania
+## Copyright (c) 2021, Laboratory of David Issadore, Penn Engineering, University of Pennsylvania
 ## All Rights Reserved.
-
+## 
 ## You may not use this file except in compliance with the Kim Lab License
 ## located at
 ##
@@ -16,8 +17,7 @@
 ## for the specific language governing permissions and limitations
 ## under the License.
 ###########################################################################
-## v0.1
-source("Source/functions/Tools.R")
+## v0.2
 source("Source/functions/SMITO.R")
 
 if (!require("optparse")) { 
@@ -40,6 +40,10 @@ parser <- add_option(parser, "--version_dir", action = "store", type = "characte
 
 opts <- parse_args(parser, args = commandArgs(trailingOnly = TRUE))
 
+is_online <- function(host = "\\.upenn\\.edu$") {
+    grepl(host, system("hostname", intern = TRUE), ignore.case = TRUE)
+}
+
 parse_basediff_bymito <- function(exptID, libraryID, mitoID, snvIDs = paste0("SNV", 1:12), qth = 30, starbase = "unique", cache_dir = "~/Workspace.cache/SMITO", data_dir = "Data", expt_dir = "E.smito", result_dir = "Report", version_dir = "20210510") {
 
 ## 1.1 Load the markup fixed data after running `rm_mpileup_indel.pl`.
@@ -58,7 +62,7 @@ parse_basediff_bymito <- function(exptID, libraryID, mitoID, snvIDs = paste0("SN
     data_dir_cache <- sprintf("%s/%s", cache_dir, data_dir)
     result_dir_cache <- sprintf("%s/%s", cache_dir, result_dir)
 
-    datadir <- sprintf("%s/%s/SNVs", ifelse(Tools$is_online(), data_dir_cache, data_dir), version_dir)
+    datadir <- sprintf("%s/%s/SNVs", ifelse(is_online(), data_dir_cache, data_dir), version_dir)
     dir.create(datadir, FALSE, TRUE)
     saveRDS(mpileups_cutdemux, file = sprintf("%s/mpileups_cutdemux_%s_sub500k.RDS", datadir, libraryMitoID))
     mpileups_cutdemux <- readRDS(file = sprintf("%s/mpileups_cutdemux_%s_sub500k.RDS", datadir, libraryMitoID))
@@ -105,7 +109,7 @@ parse_basediff_bymito <- function(exptID, libraryID, mitoID, snvIDs = paste0("SN
         basedifffreq_cutdemux_df <- data.frame(ExptID = character(0), LibraryID = character(0), MitoID = character(0), SNVID = character(0), pos = integer(0), ref = character(0), sapply(basedifflevels, function(i) integer(0)), stringsAsFactors = FALSE, row.names = NULL, check.names = FALSE)
     }
 
-    resultdir <- sprintf("%s/%s/SNVs", ifelse(Tools$is_online(), result_dir_cache, result_dir), version_dir)
+    resultdir <- sprintf("%s/%s/SNVs", ifelse(is_online(), result_dir_cache, result_dir), version_dir)
     dir.create(resultdir, FALSE, TRUE)
     write.csv(basedifffreq_cutdemux_df, file = gzfile(sprintf("%s/basedifffreq_cutdemux_%s_sub500k_q%s.csv.gz", resultdir, libraryMitoID, qth)), row.names = FALSE)
     basedifffreq_cutdemux_df <- read.csv(sprintf("%s/basedifffreq_cutdemux_%s_sub500k_q%s.csv.gz", resultdir, libraryMitoID, qth), as.is = TRUE, check.names = FALSE)
@@ -134,7 +138,7 @@ parse_basediff_bymito <- function(exptID, libraryID, mitoID, snvIDs = paste0("SN
             data.frame(V1=character(0), V2=integer(0), V3=character(0), V4=integer(0), V5=character(0), V6=character(0), V7=integer(0), stringsAsFactors = FALSE))
     }, simplify = FALSE)
 
-    datadir <- sprintf("%s/%s/SNVs/ins", ifelse(Tools$is_online(), data_dir_cache, data_dir), version_dir)
+    datadir <- sprintf("%s/%s/SNVs/ins", ifelse(is_online(), data_dir_cache, data_dir), version_dir)
     dir.create(datadir, FALSE, TRUE)
     saveRDS(mpileups_ins_cutdemux, file = sprintf("%s/mpileups_ins_cutdemux_%s_sub500k.RDS", datadir, libraryMitoID))
     mpileups_ins_cutdemux <- readRDS(file = sprintf("%s/mpileups_ins_cutdemux_%s_sub500k.RDS", datadir, libraryMitoID))
@@ -149,7 +153,7 @@ parse_basediff_bymito <- function(exptID, libraryID, mitoID, snvIDs = paste0("SN
         }
     }))
 
-    resultdir <- sprintf("%s/%s/SNVs/ins", ifelse(Tools$is_online(), result_dir_cache, result_dir), version_dir)
+    resultdir <- sprintf("%s/%s/SNVs/ins", ifelse(is_online(), result_dir_cache, result_dir), version_dir)
     dir.create(resultdir, FALSE, TRUE)
     write.csv(mpileups_ins_cutdemux, file = gzfile(sprintf("%s/mpileups_ins_cutdemux_%s_sub500k.csv.gz", resultdir, libraryMitoID)), row.names = FALSE)
     mpileups_ins_cutdemux <- read.csv(sprintf("%s/mpileups_ins_cutdemux_%s_sub500k.csv.gz", resultdir, libraryMitoID), as.is = TRUE, check.names = FALSE)
