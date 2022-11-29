@@ -458,26 +458,26 @@ function sam_stats {
 
     for i in $bcidx; do
         m=M$i
-#         if [[ $verbose == "true" ]]; then
-#             echo java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2\> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
-#         fi
-#         java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
-#         if [[ $verbose == "true" ]]; then
-#             echo samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
-#         fi
-#         samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
-#         if [[ $verbose == "true" ]]; then
-#             echo samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \| perl -ne \'if \(/^@/\) { print } else { print if /NH:i:1\\t/ }\' \| samtools view -Sb - \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
-#         fi
-#         samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam | perl -ne 'if (/^@/) { print } else { print if /NH:i:1\t/ }' | samtools view -Sb - > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
-#         if [[ $verbose == "true" ]]; then
-#             echo samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
-#         fi
-#         samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
-#         if [[ $verbose == "true" ]]; then
-#             echo samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam \| gzip -c \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
-#         fi
-#         samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam | gzip -c > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
+        if [[ $verbose == "true" ]]; then
+            echo java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2\> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
+        fi
+        java -XX:ParallelGCThreads=$ncores -jar $picard MarkDuplicates INPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.posSorted.bam OUTPUT=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam METRICS_FILE=$baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.stats.txt REMOVE_DUPLICATES=false USE_JDK_DEFLATER=true USE_JDK_INFLATER=true 2> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam.log 
+        if [[ $verbose == "true" ]]; then
+            echo samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
+        fi
+        samtools flagstat $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.flagstat.txt
+        if [[ $verbose == "true" ]]; then
+            echo samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam \| perl -ne \'if \(/^@/\) { print } else { print if /NH:i:1\\t/ }\' \| samtools view -Sb - \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+        fi
+        samtools view -h $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.DupMarked.bam | perl -ne 'if (/^@/) { print } else { print if /NH:i:1\t/ }' | samtools view -Sb - > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+        if [[ $verbose == "true" ]]; then
+            echo samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+        fi
+        samtools index $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam
+        if [[ $verbose == "true" ]]; then
+            echo samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam \| gzip -c \> $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
+        fi
+        samtools depth -d 0 -l 0 -q 0 -Q 0 -g 0x400 -J $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.posSorted.bam | gzip -c > $baseDir/$exptDir/analyzed/$sampleName/${sampleName}_$m/star/${sampleName}_$m.star.unique.depth.tsv.gz
 
         ## Add an additional filter for reads that (1) start from the 5' end of the PCR forward primer, (2) have length >130bp, (3) on the forward strand 
         if [[ $verbose == "true" ]]; then
@@ -761,15 +761,15 @@ function run_pipe {
         esac
     done
 
-#     if [[ $verbose == "true" ]]; then
-#         echo init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
-#     fi
-#     init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
-# 
-#     if [[ $verbose == "true" ]]; then
-#         echo primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
-#     fi
-#     primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
+    if [[ $verbose == "true" ]]; then
+        echo init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
+    fi
+    init_repo --repoDir $repoDir --baseDir $baseDir --exptDir $exptDir --exptID $exptID --sampleID $sampleID --bcidx "$bcidx" $verboseFlag
+
+    if [[ $verbose == "true" ]]; then
+        echo primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
+    fi
+    primer_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores $verboseFlag
 
     if [[ $verbose == "true" ]]; then
         echo sam_stats --baseDir $baseDir --endType $endType --exptDir $exptDir --sampleID $sampleID --bcidx "$bcidx" --ncores $ncores --picard $picard $verboseFlag
