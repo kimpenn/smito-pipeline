@@ -1,21 +1,12 @@
 ###########################################################################
 ## Author: Youtao Lu <luyoutao@sas.upenn.edu>
 ## 
-## Copyright (c) 2021, Laboratory of Junhyong Kim, Department of Biology, University of Pennsylvania
-## Copyright (c) 2021, Laboratory of James Eberwine, Perelman School of Medicine, University of Pennsylvania
-## Copyright (c) 2021, Laboratory of David Issadore, Penn Engineering, University of Pennsylvania
-## All Rights Reserved.
+## Copyright (c) 2021-2023, Youtao Lu and Junhyong Kim, Department of Biology, University of Pennsylvania
+## Copyright (c) 2021-2023, James Eberwine, Perelman School of Medicine, University of Pennsylvania
+## Copyright (c) 2021-2023, David Issadore, Penn Engineering, University of Pennsylvania
 ## 
-## You may not use this file except in compliance with the Kim Lab License
-## located at
-##
-##     http://kim.bio.upenn.edu/software/LICENSE
-##
-## Unless required by applicable law or agreed to in writing, this
-## software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-## CONDITIONS OF ANY KIND, either express or implied.  See the License
-## for the specific language governing permissions and limitations
-## under the License.
+## This program is free software; you can redistribute it and/or modify it under the terms of the the Artistic License (2.0). You may obtain a copy of the full license at: 
+## https://opensource.org/license/artistic-2-0/
 ###########################################################################
 ## v0.7
 
