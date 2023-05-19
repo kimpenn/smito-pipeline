@@ -45,14 +45,14 @@ Youtao Lu (<luyoutao@sas.upenn.edu>)
 
 ## Copyright
 ```
-Copyright (c) 2021-2023, Youtao Lu and Junhyong Kim, Department of Biology, University of Pennsylvania
-Copyright (c) 2021-2023, James Eberwine, Perelman School of Medicine, University of Pennsylvania
-Copyright (c) 2021-2023, David Issadore, Penn Engineering, University of Pennsylvania
+Copyright (c) 2021-2023, Youtao Lu, Erik Nordgren, Stephen Fisher and Junhyong Kim, Department of Biology, University of Pennsylvania
+Copyright (c) 2021-2023, Parnika Kadam, Hua Zhu and James Eberwine, Perelman School of Medicine, University of Pennsylvania
+Copyright (c) 2021-2023, Zijian Yang, Yasemin Atiyas, Nishal Shah and David Issadore, Penn Engineering, University of Pennsylvania
 ```
 
 ## License
 [Artistic License 2.0](https://opensource.org/license/artistic-2-0/)
 
 ## References
-1. Jacqueline Morris, Young-Ji Na, Hua Zhu, Jae-Hee Lee, Hoa Giang, Alexandra V. Ulyanova, Gordon H. Baltuch, Steven Brem, H. Issac Chen, David K. Kung, Timothy H. Lucas, Donald M. O'Rourke, John A. Wolf, M. Sean Grady, Jai-Yoon Sul, Junhyong Kim and James Eberwine. 2017. "Pervasive Within-Mitochondrion Single-Nucleotide Variant Heteroplasmy as Revealed by Single-Mitochondrion Sequencing." Cell Reports 21 (10): 2706-13. https://doi.org/10.1016/j.celrep.2017.11.031.
-2. Parnika S. Kadam, Zijian Yang, Youtao Lu, Hua Zhu, Yasemin Atiyas, Nishal Shah, Stephen Fisher, Erik Nordgren, Junhyong Kim, David Issadore and James Eberwine. "Large-Scale Single-Mitochondrion Sequencing Revealed Distinct Mutational Patterns and Hierarchical Distribution of Single-Nucleotide Heteroplasmy in Mouse Astrocytes and Neurons" (under review)
+1. Jacqueline Morris, Young-Ji Na, Hua Zhu, Jae-Hee Lee, Hoa Giang, Alexandra V. Ulyanova, Gordon H. Baltuch, Steven Brem, H. Issac Chen, David K. Kung, Timothy H. Lucas, Donald M. O'Rourke, John A. Wolf, M. Sean Grady, Jai-Yoon Sul, Junhyong Kim and James Eberwine. 2017. "Pervasive Within-Mitochondrion Single-Nucleotide Variant Heteroplasmy as Revealed by Single-Mitochondrion Sequencing." [(Cell Reports 21 (10): 2706-13)](https://doi.org/10.1016/j.celrep.2017.11.031)
+2. Parnika Kadam, Zijian Yang, Youtao Lu, Hua Zhu, Yasemin Atiyas, Nishal Shah, Stephen Fisher, Erik Nordgren, Junhyong Kim, David Issadore and James Eberwine. "Large-Scale Single-Mitochondrion Sequencing Revealed Distinct Mutational Patterns and Hierarchical Distribution of Single-Nucleotide Heteroplasmy in Mouse Astrocytes and Neurons" (under review)
