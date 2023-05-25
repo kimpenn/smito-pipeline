@@ -15,4 +15,4 @@ ln -sf ../../../Datasets Data/
 mkdir -p Data/Datasets/lab/repo/E.smito
 ln -sf ../../../Datasets/lab/repo/E.smito Data/
 ## limit to 64 cores
-awk -vFS=',' '$6=="SE" { gsub("M", "", $4); gsub(";", ",", $4); print }' Data/LibraryInfo.csv | parallel -j 9 --colsep ' ' "run_pipe --exptID {2} --sampleID {1} --endType {6} --subsam_n 500000 --subsam_l 500k --genome /lab/repo/resources/src/mm10.mito/chrM.fa --bcidx {4} --ncores 7 --verbose" 
+awk -vFS=',' '$6=="SE" { gsub("M", "", $4); gsub(";", ",", $4); print }' Data/LibraryInfo.csv | parallel -j 9 --colsep ' ' "run_pipe --exptID {2} --sampleID {1} --endType {6} --subsam_n 500000 --subsam_l 500k --genome Data/mm10.mito/chrM.fa --bcidx {4} --ncores 7 --verbose" 

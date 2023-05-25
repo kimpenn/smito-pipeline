@@ -46,9 +46,9 @@ for (exptID in exptIDs) {
     })
     names(mpileups_cutdemux) <- libraryIDs
 
-    dir.create("Data/release/SNVs", FALSE, TRUE)
-    saveRDS(mpileups_cutdemux, file = sprintf("Data/release/SNVs/mpileups_cutdemux_E%s_sub500k.RDS", exptID))
-    mpileups_cutdemux <- readRDS(file = sprintf("Data/release/SNVs/mpileups_cutdemux_E%_sub500k.RDS", exptID))
+    dir.create("Data/SNVs", FALSE, TRUE)
+    saveRDS(mpileups_cutdemux, file = sprintf("Data/SNVs/mpileups_cutdemux_E%s_sub500k.RDS", exptID))
+    mpileups_cutdemux <- readRDS(file = sprintf("Data/SNVs/mpileups_cutdemux_E%_sub500k.RDS", exptID))
         
     ## 1.2 Calculate each base's frequency for each position, strand aware.
     basedifflevels <- c(".", ",", "A", "a", "C", "c", "G", "g", "T", "t", "N", "n", "*", "#")
@@ -82,9 +82,9 @@ for (exptID in exptIDs) {
         X
     }, simplify = FALSE)
 
-    dir.create("Data/release/SNVs", FALSE, TRUE)
-    saveRDS(basedifffreq_cutdemux_q30, file = sprintf("Data/release/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.RDS", exptID))
-    basedifffreq_cutdemux_q30 <- readRDS(file = sprintf("Data/release/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.RDS", exptID))
+    dir.create("Data/SNVs", FALSE, TRUE)
+    saveRDS(basedifffreq_cutdemux_q30, file = sprintf("Data/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.RDS", exptID))
+    basedifffreq_cutdemux_q30 <- readRDS(file = sprintf("Data/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.RDS", exptID))
 
     basedifffreq_cutdemux_q30_df <- do.call(rbind, lapply(libraryIDs, function(x) {
         Z <- do.call(rbind, lapply(mitoIDs, function(y) {
@@ -110,9 +110,9 @@ for (exptID in exptIDs) {
         }
     }))
 
-    dir.create("Report/release/SNVs", FALSE, TRUE)
-    write.csv(basedifffreq_cutdemux_q30_df, file = gzfile(sprintf("Report/release/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.csv.gz", exptID)), row.names = FALSE)
-    basedifffreq_cutdemux_q30_df <- read.csv(sprintf("Report/release/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.csv.gz", exptID), as.is = TRUE, check.names = FALSE)
+    dir.create("Report/SNVs", FALSE, TRUE)
+    write.csv(basedifffreq_cutdemux_q30_df, file = gzfile(sprintf("Report/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.csv.gz", exptID)), row.names = FALSE)
+    basedifffreq_cutdemux_q30_df <- read.csv(sprintf("Report/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30.csv.gz", exptID), as.is = TRUE, check.names = FALSE)
 
     ## 1.3 Calculate each base's frequency for each position, strand merged
     basedifffreq_cutdemux_q30_unstranded <- data.frame(
@@ -127,8 +127,8 @@ for (exptID in exptIDs) {
     )
     basedifffreq_cutdemux_q30_unstranded$depth <- rowSums(basedifffreq_cutdemux_q30_unstranded[, 7:12])
     basedifffreq_cutdemux_q30_unstranded <- basedifffreq_cutdemux_q30_unstranded[, c(1:6, 13, 7:12)]
-    write.csv(basedifffreq_cutdemux_q30_unstranded, file = gzfile(sprintf("Report/release/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30_unstranded.csv.gz", exptID)), row.names = FALSE)
-    basedifffreq_cutdemux_q30_unstranded <- read.csv(sprintf("Report/release/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30_unstranded.csv.gz", exptID), as.is = TRUE, check.names = FALSE)
+    write.csv(basedifffreq_cutdemux_q30_unstranded, file = gzfile(sprintf("Report/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30_unstranded.csv.gz", exptID)), row.names = FALSE)
+    basedifffreq_cutdemux_q30_unstranded <- read.csv(sprintf("Report/SNVs/basedifffreq_cutdemux_E%s_sub500k_q30_unstranded.csv.gz", exptID), as.is = TRUE, check.names = FALSE)
 
     ## 2. Process insertions.
     mpileups_ins_cutdemux <- lapply(libraryIDs, function(x) {
@@ -145,8 +145,8 @@ for (exptID in exptIDs) {
         X
     })
     names(mpileups_ins_cutdemux) <- libraryIDs
-    saveRDS(mpileups_ins_cutdemux, file = sprintf("Data/release/SNVs/mpileups_ins_cutdemux_E%s_sub500k.RDS", exptID))
-    mpileups_ins_cutdemux <- readRDS(file = sprintf("Data/release/SNVs/mpileups_ins_cutdemux_E%s_sub500k.RDS", exptID))
+    saveRDS(mpileups_ins_cutdemux, file = sprintf("Data/SNVs/mpileups_ins_cutdemux_E%s_sub500k.RDS", exptID))
+    mpileups_ins_cutdemux <- readRDS(file = sprintf("Data/SNVs/mpileups_ins_cutdemux_E%s_sub500k.RDS", exptID))
 
     mpileups_ins_cutdemux <- lapply(libraryIDs, function(x) {
         X <- lapply(mitoIDs, function(y) {
@@ -165,6 +165,6 @@ for (exptID in exptIDs) {
     })
     mpileups_ins_cutdemux <- do.call(rbind, mpileups_ins_cutdemux)
 
-    dir.create("Report/release/SNVs", FALSE, TRUE)
-    write.csv(mpileups_ins_cutdemux, file = gzfile(sprintf("Report/release/SNVs/ins/mpileups_ins_cutdemux_E%s_sub500k.csv.gz", exptID)), row.names = FALSE)
+    dir.create("Report/SNVs", FALSE, TRUE)
+    write.csv(mpileups_ins_cutdemux, file = gzfile(sprintf("Report/SNVs/ins/mpileups_ins_cutdemux_E%s_sub500k.csv.gz", exptID)), row.names = FALSE)
 }
