@@ -1,4 +1,4 @@
-# Single-MITOchondrion (SMITO) Single-Nucleotide Variant Pipeline
+# Single-MITOchondrion (SMITO) Single-Nucleotide Variant (SNV) Pipeline
 
 ## Overview
 This is the computational pipeline that takes in FACS sorting based, mito-locus multiplexed (Figure 1) NGS data, and outputs SNVs (including indels) for each mitochondrion for each PCR targeted region, succeeding the previous work based on micropipetting [1]. The output is a comma-delimited table containing per-base information including the position, read depth, reference base, and the frequency of variants (substitution/deletion) in a single mitochondrion, which is further processed so that low-Phred-score, reverse-strand or low-depth counts can be removed. Deletions are output alongside substitutions while insertions are tabulated in a separate sheet. 
@@ -8,7 +8,7 @@ This is the computational pipeline that takes in FACS sorting based, mito-locus 
 Figure 1. Schematic showing the organelle sorting and multiplexed RCA/PCR amplification technology developed by the Laboratories of David Issadore and James Eberwine. 
 
 ## Dependencies
-* [PennSCAP-T preprocessor](https://github.com/kimpenn/ngs-smito) (>=2.3)
+* [PennSCAP-T preprocessor](https://github.com/safisher/ngs) (>=2.3)
 * GNU parallel (>=20190122)
 * Perl (>=5.010), String::Approx (>3.0)
 * R (>=3.5.0), optparse (>=1.6), parallel (>=4.1)
