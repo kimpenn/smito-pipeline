@@ -5,10 +5,10 @@ This is the computational pipeline that takes in FACS sorting based, mito-locus 
 
 
 ![Figure 1](multiplex.png)
-Figure 1. Schematic showing the organelle sorting and multiplexed RCA/PCR amplification technology developed by the Laboratories of David Issadore and James Eberwine. 
+Figure 1. Schematic showing the organelle sorting and multiplexed RCA/PCR amplification technology developed by the Laboratories of David Issadore and James Eberwine (Figure adapted from Hua Zhu).
 
 ## Dependencies
-* [PennSCAP-T preprocessor](https://github.com/safisher/ngs) (>=2.3)
+* [PennSCAP-T preprocessor](https://github.com/kimpenn/ngs-pipeline) (>=2.3)
 * GNU parallel (>=20190122)
 * Perl (>=5.010), String::Approx (>3.0)
 * R (>=3.5.0), optparse (>=1.6), parallel (>=4.1)
@@ -54,5 +54,5 @@ Copyright (c) 2021-2023, Zijian Yang, Yasemin Atiyas, Nishal Shah and David Issa
 [Artistic License 2.0](https://opensource.org/license/artistic-2-0/)
 
 ## References
-1. Jacqueline Morris, Young-Ji Na, Hua Zhu, Jae-Hee Lee, Hoa Giang, Alexandra V. Ulyanova, Gordon H. Baltuch, Steven Brem, H. Issac Chen, David K. Kung, Timothy H. Lucas, Donald M. O'Rourke, John A. Wolf, M. Sean Grady, Jai-Yoon Sul, Junhyong Kim and James Eberwine. 2017. "Pervasive Within-Mitochondrion Single-Nucleotide Variant Heteroplasmy as Revealed by Single-Mitochondrion Sequencing." ([Cell Reports 21 (10): 2706-13](https://doi.org/10.1016/j.celrep.2017.11.031))
+1. Jacqueline Morris, Young-Ji Na, Hua Zhu, Jae-Hee Lee, Hoa Giang, Alexandra V. Ulyanova, Gordon H. Baltuch, Steven Brem, H. Issac Chen, David K. Kung, Timothy H. Lucas, Donald M. O'Rourke, John A. Wolf, M. Sean Grady, Jai-Yoon Sul, Junhyong Kim and James Eberwine. "Pervasive Within-Mitochondrion Single-Nucleotide Variant Heteroplasmy as Revealed by Single-Mitochondrion Sequencing." ([Cell Reports 21 (10): 2706-13](https://doi.org/10.1016/j.celrep.2017.11.031))
 2. Parnika Kadam, Zijian Yang, Youtao Lu, Hua Zhu, Yasemin Atiyas, Nishal Shah, Stephen Fisher, Erik Nordgren, Junhyong Kim, David Issadore and James Eberwine. "Single-Mitochondrion Sequencing Uncovers Distinct Mutational Patterns and Heteroplasmy Landscape in Mouse Astrocytes and Neurons" ([BMC Biology 22, 162 (2024)](https://doi.org/10.1186/s12915-024-01953-7))
