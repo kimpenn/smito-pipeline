@@ -1,7 +1,7 @@
 # Single-MITOchondrion (SMITO) Single-Nucleotide Variant (SNV) Pipeline
 
 ## Overview
-This is the computational pipeline that takes in FACS sorting based, mito-locus multiplexed (Figure 1) NGS data, and outputs SNVs (including indels) for each mitochondrion for each PCR targeted region, succeeding the previous work based on micropipetting [1]. The output is a comma-delimited table containing per-base information including the position, read depth, reference base, and the frequency of variants (substitution/deletion) in a single mitochondrion, which is further processed so that low-Phred-score, reverse-strand or low-depth counts can be removed. Deletions are output alongside substitutions while insertions are tabulated in a separate sheet. 
+This is the computational pipeline that takes in FACS based, mito-locus multiplexed sequencing data (Figure 1), and outputs SNVs (including indels) for each mitochondrion in each PCR target region [1], succeeding the previous work based on micropipetting [2]. The output is a comma-delimited table containing per-base information including the position, read depth, reference allele, and frequency of variants (substitution/indel) for single mitochondria. The pipeline further processes the data so that low-Phred-score, reverse-strand or low-depth counts can be removed. Deletions are output alongside substitutions while insertions are tabulated in a separate sheet. 
 
 
 ![Figure 1](multiplex.png)
@@ -32,12 +32,12 @@ L4R61P1,777,mouse,M1;M2;M3;M4;M5;M6;M7;M8;M9;M10,v2,SE,150
 
 2. Run the pipeline to generate primer and sequencing stats as well as the pileup files by 
 ```
-$ bash Source/release/01.pipeline.bash
+$ bash Source/01.pipeline.bash
 ``` 
 
 3. Generate the SNV table for each sequencing run in R by
 ```
-source("Source/release/02.pipeline.R")
+source("Source/02.pipeline.R")
 ```
 
 ## Author
@@ -54,5 +54,5 @@ Copyright (c) 2021-2023, Zijian Yang, Yasemin Atiyas, Nishal Shah and David Issa
 [Artistic License 2.0](https://opensource.org/license/artistic-2-0/)
 
 ## References
-1. Jacqueline Morris, Young-Ji Na, Hua Zhu, Jae-Hee Lee, Hoa Giang, Alexandra V. Ulyanova, Gordon H. Baltuch, Steven Brem, H. Issac Chen, David K. Kung, Timothy H. Lucas, Donald M. O'Rourke, John A. Wolf, M. Sean Grady, Jai-Yoon Sul, Junhyong Kim and James Eberwine. "Pervasive Within-Mitochondrion Single-Nucleotide Variant Heteroplasmy as Revealed by Single-Mitochondrion Sequencing." ([Cell Reports 21 (10): 2706-13](https://doi.org/10.1016/j.celrep.2017.11.031))
-2. Parnika Kadam, Zijian Yang, Youtao Lu, Hua Zhu, Yasemin Atiyas, Nishal Shah, Stephen Fisher, Erik Nordgren, Junhyong Kim, David Issadore and James Eberwine. "Single-Mitochondrion Sequencing Uncovers Distinct Mutational Patterns and Heteroplasmy Landscape in Mouse Astrocytes and Neurons" ([BMC Biology 22, 162 (2024)](https://doi.org/10.1186/s12915-024-01953-7))
+1. Parnika Kadam, Zijian Yang, Youtao Lu, Hua Zhu, Yasemin Atiyas, Nishal Shah, Stephen Fisher, Erik Nordgren, Junhyong Kim, David Issadore and James Eberwine. "Single-Mitochondrion Sequencing Uncovers Distinct Mutational Patterns and Heteroplasmy Landscape in Mouse Astrocytes and Neurons" ([BMC Biology 22, 162 (2024)](https://doi.org/10.1186/s12915-024-01953-7))
+2. Jacqueline Morris, Young-Ji Na, Hua Zhu, Jae-Hee Lee, Hoa Giang, Alexandra V. Ulyanova, Gordon H. Baltuch, Steven Brem, H. Issac Chen, David K. Kung, Timothy H. Lucas, Donald M. O'Rourke, John A. Wolf, M. Sean Grady, Jai-Yoon Sul, Junhyong Kim and James Eberwine. "Pervasive Within-Mitochondrion Single-Nucleotide Variant Heteroplasmy as Revealed by Single-Mitochondrion Sequencing." ([Cell Reports 21 (10): 2706-13](https://doi.org/10.1016/j.celrep.2017.11.031))
