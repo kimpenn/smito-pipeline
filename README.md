@@ -5,7 +5,7 @@ This is the computational pipeline that takes in FACS based, mito-locus multiple
 
 
 ![Figure 1](multiplex.png)
-Figure 1. Schematic showing the organelle sorting and multiplexed RCA/PCR amplification technology developed by the Laboratories of David Issadore and James Eberwine (Figure adapted from Hua Zhu).
+Figure 1. Schematic showing the organelle sorting and multiplexed RCA/PCR amplification technology developed by the Laboratories of David Issadore and James Eberwine (Figure adapted from Hua Zhu; the mitochondrion icon designed by Freepik and obtained from [Flaticon](https://www.flaticon.com/free-icon/mitochondria_4799064)).
 
 ## Dependencies
 * [PennSCAP-T preprocessor](https://github.com/kimpenn/ngs-pipeline) (>=2.3)
