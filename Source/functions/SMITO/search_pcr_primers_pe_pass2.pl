@@ -11,7 +11,7 @@
 ## v0.7
 
 ## Search the PCR forward and reverse primers for SNV1-12 successively for each mito
-## for paired-end seqeuencing, pass one (searching R2)
+## for paired-end seqeuencing, pass two (searching R2)
 
 use strict;
 use warnings;
