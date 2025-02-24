@@ -5,7 +5,7 @@
 ## Copyright (c) 2021-2023, James Eberwine, Perelman School of Medicine, University of Pennsylvania
 ## Copyright (c) 2021-2023, David Issadore, Penn Engineering, University of Pennsylvania
 ## 
-## This program is free software; you can redistribute it and/or modify it under the terms of the the Artistic License (2.0). You may obtain a copy of the full license at: 
+## This program is free software; you can redistribute it and/or modify it under the terms of the Artistic License (2.0). You may obtain a copy of the full license at: 
 ## https://opensource.org/license/artistic-2-0/
 ###########################################################################
 ## v0.5
